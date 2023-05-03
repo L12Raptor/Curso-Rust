@@ -1,2 +1,2 @@
-# Curso-Rust
+# Curso de Rust
 Mi formación en Rust
