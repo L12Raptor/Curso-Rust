@@ -1,5 +1,5 @@
 fn main() {
-    
+
 }
 
 #[test]
@@ -22,6 +22,7 @@ fn test_select_row_less_than_zero_should_return_false() {
     assert!(!result);
 }
 
+#[test]
 fn test_select_column_less_than_zero_should_return_false() {
     let row: i32 = 0;
     let column: i32 = -1;
