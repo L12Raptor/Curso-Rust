@@ -6,6 +6,12 @@ struct Board {
     squares: [[char; 3]; 3],
 }
 
+impl Board {
+    fn new() -> Board {
+        Board { squares: [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']] }
+    }
+}
+
 fn select_board_square(row: i32, column: i32) -> bool {
     let mut result: bool = true;
 
