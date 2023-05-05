@@ -61,3 +61,16 @@ fn test_select_column_greater_than_two_should_return_false() {
 
     assert!(!result);
 }
+
+#[test]
+fn test_select_already_selected_board_square_should_return_false()
+{
+    let row: i32 = 1;
+    let column: i32 = 1;
+
+    select_board_square(row, column);
+
+    let result: bool = select_board_square(row, column);
+
+    assert!(!result);
+}
