@@ -2,6 +2,16 @@ fn main() {
 
 }
 
+fn select_board_square(row: i32, column: i32) -> bool {
+    let mut result: bool = true;
+
+    if !(0..=2).contains(&row) || !(0..=2).contains(&column) {
+        result = false;
+    }
+
+    result
+}
+
 #[test]
 fn test_select_valid_board_square_should_return_true() {
     let row: i32 = 2;
