@@ -12,10 +12,10 @@ impl Board {
     }
 }
 
-fn select_board_square(row: i32, column: i32) -> bool {
+fn is_valid_board_square(row: i32, column: i32, board: &Board) -> bool {
     let mut result: bool = true;
 
-    if !(0..=2).contains(&row) || !(0..=2).contains(&column) {
+    if !(0..=2).contains(&row) || !(0..=2).contains(&column) || board.squares[row as usize][column as usize] != '_' {
         result = false;
     }
 
