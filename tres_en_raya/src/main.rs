@@ -2,6 +2,10 @@ fn main() {
 
 }
 
+struct Board {
+    squares: [[char; 3]; 3],
+}
+
 fn select_board_square(row: i32, column: i32) -> bool {
     let mut result: bool = true;
 
