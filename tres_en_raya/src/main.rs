@@ -3,6 +3,48 @@ use std::io;
 use rand::Rng;
 
 fn main() {
+    main_menu();
+
+    println!("Hasta la próxima :D");
+}
+
+fn main_menu() {
+    let stdin = io::stdin();
+
+    let mut text: String;
+
+    loop {
+        println!("Selecciona una opción:");
+        println!("1 - Jugar tres en raya");
+        println!("0 - Salir");
+
+        text = String::new();
+
+        let result = stdin.read_line(&mut text);
+
+        match result {
+            Ok(_) => {
+                let test = &text.trim().parse::<i32>();
+                match test {
+                    Ok(number) => {
+                        if *number == 1 {
+                            play_game();
+                        }
+                        else if *number == 0 {
+                            break;
+                        }
+                    }
+                    Err(_) => println!("Debes escribir un número!"),
+                }
+            }
+            Err(_) => {
+                println!("Hubo un problema leyendo los caracteres introducidos por teclado!")
+            }
+        };
+    }
+}
+
+fn play_game() {
     let stdin = io::stdin();
 
     let mut board: Board = Board::new();
@@ -114,92 +156,91 @@ fn main() {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][0] == 'o' {
+            } else if board.squares[0][0] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[1][0] == board.squares[1][1] && board.squares[1][1] == board.squares[1][2] {
+        } else if board.squares[1][0] == board.squares[1][1]
+            && board.squares[1][1] == board.squares[1][2]
+        {
             if board.squares[1][0] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[1][0] == 'o' {
+            } else if board.squares[1][0] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[2][0] == board.squares[2][1] && board.squares[2][1] == board.squares[2][2] {
+        } else if board.squares[2][0] == board.squares[2][1]
+            && board.squares[2][1] == board.squares[2][2]
+        {
             if board.squares[2][0] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[2][0] == 'o' {
+            } else if board.squares[2][0] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[0][0] == board.squares[1][0] && board.squares[1][0] == board.squares[2][0] {
+        } else if board.squares[0][0] == board.squares[1][0]
+            && board.squares[1][0] == board.squares[2][0]
+        {
             if board.squares[0][0] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][0] == 'o' {
+            } else if board.squares[0][0] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[0][1] == board.squares[1][1] && board.squares[1][1] == board.squares[2][1] {
+        } else if board.squares[0][1] == board.squares[1][1]
+            && board.squares[1][1] == board.squares[2][1]
+        {
             if board.squares[0][1] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][1] == 'o' {
+            } else if board.squares[0][1] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[0][2] == board.squares[1][2] && board.squares[1][2] == board.squares[2][2] {
+        } else if board.squares[0][2] == board.squares[1][2]
+            && board.squares[1][2] == board.squares[2][2]
+        {
             if board.squares[0][2] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][2] == 'o' {
+            } else if board.squares[0][2] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[0][0] == board.squares[1][1] && board.squares[1][1] == board.squares[2][2] {
+        } else if board.squares[0][0] == board.squares[1][1]
+            && board.squares[1][1] == board.squares[2][2]
+        {
             if board.squares[0][0] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][0] == 'o' {
+            } else if board.squares[0][0] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
             }
-        }
-        else if board.squares[0][2] == board.squares[1][1] && board.squares[1][1] == board.squares[2][0] {
+        } else if board.squares[0][2] == board.squares[1][1]
+            && board.squares[1][1] == board.squares[2][0]
+        {
             if board.squares[0][2] == 'x' {
                 println!("Enhorabuena jugador, has ganado!");
 
                 ok = true;
-            }
-            else if board.squares[0][2] == 'o' {
+            } else if board.squares[0][2] == 'o' {
                 println!("Victoria para la máquina, lo siento jugador, otra vez será.");
 
                 ok = true;
