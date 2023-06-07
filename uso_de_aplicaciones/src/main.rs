@@ -43,7 +43,7 @@ fn main() {
 
     spawn(move || {
         let segundos = match args.len() {
-            2 => match args[1].parse::<u64>() {
+            2..=4 => match args[1].parse::<u64>() {
                 Ok(secs) => secs,
                 Err(_) => {
                     println!("Segundos entre muestra de procesos ejecutados no indicados como argumento, tomaremos 60 segundos por defecto.");
@@ -56,6 +56,34 @@ fn main() {
             },
         };
 
+        let program_name = match args.len() {
+            3..=4 => match args[2].as_str() {
+                "-" => {
+                    println!("Nombre de programa para filtrar los procesos no indicado como argumento, no se filtrará por nombre de programa.");
+                    None
+                },
+                _ => Some(args[2].as_str()),
+            }
+            _ => {
+                println!("Nombre de programa para filtrar los procesos no indicado como argumento, no se filtrará por nombre de programa.");
+                None
+            },
+        };
+
+        let username = match args.len() {
+            4 => match args[3].as_str() {
+                "-" => {
+                    println!("Nombre de usuario para filtrar los procesos no indicado como argumento, no se filtrará por usuario.");
+                    None
+                },
+                _ => Some(args[3].as_str()),
+            }
+            _ => {
+                println!("Nombre de usuario para filtrar los procesos no indicado como argumento, no se filtrará por usuario.");
+                None
+            },
+        };
+
         loop {
             thread::sleep(Duration::from_secs(segundos));
 
@@ -64,12 +92,32 @@ fn main() {
             let mut procesos_temp = procesos_copia_1.lock().unwrap();
 
             for proceso in procesos_temp.iter() {
-                println!("PID: {}", proceso.pid);
-                println!("Programa: {}", proceso.programa);
-                println!("Inicio de la ejecución: {}", proceso.inicio_ejecucion);
-                println!("Segundos en ejecución: {}", proceso.segundos_en_ejecucion);
-                println!("Usuario: {}", proceso.usuario);
-                println!();
+                let mut mostrar = false;
+
+                if let Some(nombre_programa) = program_name {
+                    if proceso.programa.contains(nombre_programa) {
+                        if let Some(nombre_usuario) = username {
+                            if proceso.usuario.contains(nombre_usuario) {
+                                mostrar = true;
+                            }
+                        }
+                        else {
+                            mostrar = true;
+                        }
+                    }
+                }
+                else {
+                    mostrar = true;
+                }
+
+                if mostrar {
+                    println!("PID: {}", proceso.pid);
+                    println!("Programa: {}", proceso.programa);
+                    println!("Inicio de la ejecución: {}", proceso.inicio_ejecucion);
+                    println!("Segundos en ejecución: {}", proceso.segundos_en_ejecucion);
+                    println!("Usuario: {}", proceso.usuario);
+                    println!();
+                }
             }
 
             procesos_temp.clear();

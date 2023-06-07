@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.26"
 sysinfo = "0.29.0"
+tasklist = "0.2.12"
